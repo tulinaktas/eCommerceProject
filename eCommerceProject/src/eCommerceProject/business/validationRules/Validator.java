@@ -11,8 +11,16 @@ public class Validator {
 	public static <T> boolean emailCheck(String email, List<T> usersEmail) {
 		Pattern pattern = Pattern.compile(emailRegex);
 		Matcher matcher = pattern.matcher(email);
-		if(matcher.matches() && !usersEmail.contains(email)) {
-			return true;
+		if(matcher.matches()) {
+			if(!usersEmail.isEmpty()) {
+				for (T _email : usersEmail) {
+					if(!_email.equals(email)) {
+						return true;
+					}
+				}
+			}else {
+				return true;
+			}
 		}
 		return false;
 	}
